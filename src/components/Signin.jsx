@@ -2,14 +2,22 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 const Signin = (props) => {
     const { toggler, settoggler, users } = props;
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
     const SubmitHandler = (data) => {
         const isUser = users.find(
             (user) => data.email == user.email && data.password == user.password
         );
-        if (isUser) toast.success("User Exists!");
-        else toast.error("User Not Found!");
+        if (isUser) {
+            toast.success("User Exists!");
+            reset();
+        } else toast.error("User Not Found!");
     };
+    console.log(errors);
     return (
         <form
             className="w-[50%] m-auto mt-10"
@@ -19,17 +27,27 @@ const Signin = (props) => {
                 Signin and Check if you are registed!
             </h1>
             <input
-                {...register("email")}
-                className="block mb-7 w-full outline-0 border-b font-thin text-2xl"
+                {...register("email", {
+                    required: "Email can not be empty!",
+                })}
+                className="block w-full outline-0 border-b font-thin text-2xl"
                 type="email"
                 placeholder="john@example.com"
             />
+            <small className=" text-red-400 block mb-4">
+                {errors?.email?.message}
+            </small>
             <input
-                {...register("password")}
-                className="block mb-7 w-full outline-0 border-b font-thin text-2xl"
+                {...register("password", {
+                    required: "password can not be empty!",
+                })}
+                className="block w-full outline-0 border-b font-thin text-2xl"
                 type="password"
                 placeholder="*******"
             />
+            <small className=" text-red-400 block mb-4">
+                {errors?.password?.message}
+            </small>
             <button className="mt-5 text-lg px-8 py-2 border rounded">
                 Sign Up
             </button>

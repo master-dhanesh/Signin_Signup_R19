@@ -1,6 +1,5 @@
 const Users = (props) => {
     const { users, setusers } = props;
-
     const DeleteHandler = (id) => {
         const filterUsers = users.filter((user) => user.id != id);
         setusers(filterUsers);
@@ -29,11 +28,19 @@ const Users = (props) => {
 
     return (
         <ul className="w-[30%] mt-10">
-            <h1 className="text-5xl mb-10 font-thin">
+            <h2
+                style={{
+                    marginTop: "5px",
+                    fontSize: "50px",
+                    fontWeight: "lighter",
+                    lineHeight: "50px",
+                    marginBottom: "20px",
+                }}
+            >
                 List Of Registered Users
-            </h1>
+            </h2>
 
-            {users.length > 0 ? userrenders : "Data Not Found!"}
+            {users.length > 0 ? userrenders : <h1>Data Not Found!</h1>}
         </ul>
     );
 };
