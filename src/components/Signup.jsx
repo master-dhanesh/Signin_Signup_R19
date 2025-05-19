@@ -1,8 +1,10 @@
 import { nanoid } from "nanoid";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { usercontext } from "../context/DataContext";
 
-const Signup = (props) => {
-    const { toggler, settoggler, users, setusers } = props;
+const Signup = () => {
+    const { toggler, settoggler, users, setusers } = useContext(usercontext);
     const { register, handleSubmit, reset } = useForm();
 
     const SubmitHandler = (data) => {

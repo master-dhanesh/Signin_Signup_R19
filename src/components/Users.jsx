@@ -1,5 +1,8 @@
-const Users = (props) => {
-    const { users, setusers } = props;
+import { useContext } from "react";
+import { usercontext } from "../context/DataContext";
+
+const Users = () => {
+    const { users, setusers } = useContext(usercontext);
     const DeleteHandler = (id) => {
         const filterUsers = users.filter((user) => user.id != id);
         setusers(filterUsers);
